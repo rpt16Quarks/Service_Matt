@@ -1,0 +1,8 @@
+#Sample file of ebay html
+eBay_sample.html
+
+#Dependencies
+node_modules
+
+#Webpack bundle
+/public/app.js
