@@ -2,7 +2,7 @@ const knex = require('knex')({
   client: 'mysql',
   connection: {
     database: 'gallery',
-    user:     'root',
+    user: 'root',
     password: ''
   }
 });
@@ -14,12 +14,12 @@ const getProductImages = function(id, callback) {
   queries.push(knex('images').where('product_id', id));
 
   Promise.all(queries)
-  .then(function(results) {
-    callback(null, results);
-  })
-  .catch(function(err) {
-    callback(err);
-  });
+    .then(function(results) {
+      callback(null, results);
+    })
+    .catch(function(err) {
+      callback(err);
+    });
 };
 
 module.exports = {

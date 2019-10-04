@@ -9,7 +9,8 @@
   },
   "scripts": {
     "start": "nodemon server/index.js",
-    "build": "webpack"
+    "build": "webpack",
+    "seedDB": "mysql -u root < schema.sql; ./node_modules/.bin/knex --knexfile ./db/knexfile.js  migrate:latest; ./node_modules/.bin/knex --knexfile ./db/knexfile.js seed:run"
   },
   "dependencies": {
     "body-parser": "^1.19.0",
