@@ -4,16 +4,16 @@ var faker = require('faker');
 var productImages = function(knex, imgCnt, id) {
   //Variable for set of S3 stored images
   var imageList = [
-    {img_small: 'image_small0', img_large: 'image_large0', img_zoom: 'image_zoom0'},
-    {img_small: 'image_small1', img_large: 'image_large1', img_zoom: 'image_zoom1'},
-    {img_small: 'image_small2', img_large: 'image_large2', img_zoom: 'image_zoom2'},
-    {img_small: 'image_small3', img_large: 'image_large3', img_zoom: 'image_zoom3'},
-    {img_small: 'image_small4', img_large: 'image_large4', img_zoom: 'image_zoom4'},
-    {img_small: 'image_small5', img_large: 'image_large5', img_zoom: 'image_zoom5'},
-    {img_small: 'image_small6', img_large: 'image_large6', img_zoom: 'image_zoom6'},
-    {img_small: 'image_small7', img_large: 'image_large7', img_zoom: 'image_zoom7'},
-    {img_small: 'image_small8', img_large: 'image_large8', img_zoom: 'image_zoom8'},
-    {img_small: 'image_small9', img_large: 'image_large9', img_zoom: 'image_zoom9'}
+    {img_small: 's3://fec-product-images/s-l64.jpg', img_large: 's3://fec-product-images/s-l500.jpg', img_zoom: 's3://fec-product-images/s-l1600.jpg'},
+    {img_small: 's3://fec-product-images/s-l64 (1).jpg', img_large: 's3://fec-product-images/s-l500 (1).jpg', img_zoom: 's3://fec-product-images/s-l1600 (1).jpg'},
+    {img_small: 's3://fec-product-images/s-l64 (2).jpg', img_large: 's3://fec-product-images/s-l500 (2).jpg', img_zoom: 's3://fec-product-images/s-l1600 (2).jpg'},
+    {img_small: 's3://fec-product-images/s-l64 (3).jpg', img_large: 's3://fec-product-images/s-l500 (3).jpg', img_zoom: 's3://fec-product-images/s-l1600 (3).jpg'},
+    {img_small: 's3://fec-product-images/s-l64 (4).jpg', img_large: 's3://fec-product-images/s-l500 (4).jpg', img_zoom: 's3://fec-product-images/s-l1600 (4).jpg'},
+    {img_small: 's3://fec-product-images/s-l64 (5).jpg', img_large: 's3://fec-product-images/s-l500 (5).jpg', img_zoom: 's3://fec-product-images/s-l1600 (5).jpg'},
+    {img_small: 's3://fec-product-images/s-l64 (6).jpg', img_large: 's3://fec-product-images/s-l500 (6).jpg', img_zoom: 's3://fec-product-images/s-l1600 (6).jpg'},
+    {img_small: 's3://fec-product-images/s-l64 (7).jpg', img_large: 's3://fec-product-images/s-l300.jpg', img_zoom: 's3://fec-product-images/s-l1600 (7).jpg'},
+    {img_small: 's3://fec-product-images/s-l64 (8).jpg', img_large: 's3://fec-product-images/s-l300 (1).jpg', img_zoom: 's3://fec-product-images/s-l1600 (8).jpg'},
+    {img_small: 's3://fec-product-images/s-l64 (9).jpg', img_large: 's3://fec-product-images/s-l300 (2).jpg', img_zoom: 's3://fec-product-images/s-l1600 (9).jpg'},
   ];
 
   var result = imageList.slice(0, imgCnt);
@@ -35,7 +35,7 @@ exports.seed = function(knex) {
       // Inserts seed entries
       var imgCnt;
       var insertArr = [];
-      for (var i = 1; i <101; i++) {
+      for (var i = 1; i < 101; i++) {
         //Select random amount of images for product
         imgCnt = Math.floor(Math.random() * 8) + 1;
 
