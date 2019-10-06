@@ -15,22 +15,20 @@ var productImages = function(knex, imgCnt, id) {
     {img_small: 'image_small8', img_large: 'image_large8', img_zoom: 'image_zoom8'},
     {img_small: 'image_small9', img_large: 'image_large9', img_zoom: 'image_zoom9'}
   ];
-  // console.log('imgCnt: ', imgCnt);
+
   var result = imageList.slice(0, imgCnt);
   for (var i = 0; i < imgCnt; i++) {
-    // console.log('i: ', i);
     result[i]['product_id'] = id;
   }
   console.log(result);
   return knex('images').insert(result);
-  // return result;
 };
 
 exports.seed = function(knex) {
   // Deletes ALL existing entries
   return knex('images').del()
     .then(function () {
-      return knex.raw('ALTER TABLE ' + 'images' + ' AUTO_INCREMENT = 1')
+      return knex.raw('ALTER TABLE ' + 'images' + ' AUTO_INCREMENT = 1');
     })
     .then(function () {
       
@@ -43,9 +41,7 @@ exports.seed = function(knex) {
 
         insertArr.push(productImages(knex, imgCnt, i));
       }
-      // console.log(insertArr);
-      return Promise.all(insertArr);
 
-      // return knex('images').insert(productImages(knex, 3, 1));
+      return Promise.all(insertArr);
     });
 };

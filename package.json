@@ -8,8 +8,9 @@
     "node": ">=6.13.0"
   },
   "scripts": {
-    "start": "node server/index.js",
-    "build": "webpack"
+    "start": "nodemon server/index.js",
+    "build": "webpack",
+    "seedDB": "mysql -u root < schema.sql; ./node_modules/.bin/knex --knexfile ./db/knexfile.js  migrate:latest; ./node_modules/.bin/knex --knexfile ./db/knexfile.js seed:run"
   },
   "dependencies": {
     "body-parser": "^1.19.0",
