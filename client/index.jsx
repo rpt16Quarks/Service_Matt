@@ -4,10 +4,10 @@ import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
 // import queryString from 'query-string';
 import App from './app.jsx';
 
-const router = (
+const Gallery = (
   <Router>
     <Route path="/" component={App}></Route>
   </Router>
 );
 
-ReactDOM.render(router, document.getElementById('app'));
+ReactDOM.render(Gallery, document.getElementById('Gallery'));

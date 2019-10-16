@@ -17,9 +17,21 @@ var productImages = function(knex, imgCnt, id) {
     {img_small: 'https://fec-product-images.s3.us-east-2.amazonaws.com/s-l64+(10).jpg', img_large: 'https://fec-product-images.s3.us-east-2.amazonaws.com/s-l500+(4).jpg', img_zoom: 'https://fec-product-images.s3.us-east-2.amazonaws.com/s-l1600+(10).jpg'}
   ];
 
-  var result = imageList.slice(0, imgCnt);
-  for (var i = 0; i < imgCnt; i++) {
-    result[i]['product_id'] = id;
+  //Specific data for product #1 that is coordinated between projects
+  var prodOneList = [
+    {product_id: 1, img_small: 'https://fec-product-images.s3.us-east-2.amazonaws.com/s-l64_chew1.jpg', img_large: 'https://fec-product-images.s3.us-east-2.amazonaws.com/s-l500_chew1.jpg', img_zoom: 'https://fec-product-images.s3.us-east-2.amazonaws.com/s-l1600_chew1.jpg'},
+    {product_id: 1, img_small: 'https://fec-product-images.s3.us-east-2.amazonaws.com/s-l64_chew2.jpg', img_large: 'https://fec-product-images.s3.us-east-2.amazonaws.com/s-l500_chew2.jpg', img_zoom: 'https://fec-product-images.s3.us-east-2.amazonaws.com/s-l1600_chew2.jpg'}
+  ];
+
+  var result;
+
+  if (id === 1) {
+    result = prodOneList;
+  } else {
+    result = imageList.slice(0, imgCnt);
+    for (var i = 0; i < imgCnt; i++) {
+      result[i]['product_id'] = id;
+    }
   }
   console.log(result);
   return knex('images').insert(result);
