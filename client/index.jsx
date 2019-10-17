@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 // import queryString from 'query-string';
-import App from './app.jsx';
+import App from './app';
 
 const Gallery = (
   <Router>
-    <Route path="/" component={App}></Route>
+    <Route path="/" component={App} />
   </Router>
 );
 

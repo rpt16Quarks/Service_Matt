@@ -1,49 +1,55 @@
 import React from 'react';
 import queryString from 'query-string';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 class App extends React.Component {
-
   constructor(props) {
     super(props);
     this.state = {
       name: 'default',
       images: [{
         small: '',
-        large: ''
-      }]
+        large: '',
+      }],
     };
   }
 
   componentDidMount() {
-    const params = queryString.parse(this.props.location.search);
+    const { location: { search } } = this.props;
+    // const params = queryString.parse(this.props.location.search);
+    const params = queryString.parse(search);
     console.log(params);
     fetch(`/images?id=${params.prod_id}`, {
-      method: 'get'
+      method: 'get',
     })
-      .then(response => response.json())
-      .then(jsonData => {
+      .then((response) => response.json())
+      .then((jsonData) => {
         console.log(jsonData);
         this.setState({
           name: jsonData.name,
-          images: jsonData.images
+          images: jsonData.images,
         });
       });
   }
 
-  
+
   render() {
-    const imgString = this.state.images[this.state.images.length - 1];
+    const { images, name } = this.state;
+    const imgString = images[images.length - 1];
     console.log(imgString);
     return (
       <div>
-        <p>Product Name: {this.state.name}</p>
+        <p>
+          Product Name:
+          {name}
+        </p>
         <Container>
           <MainPhotoDiv>
-            <LargeImg src={imgString.large}></LargeImg>
+            <LargeImg src={imgString.large} />
           </MainPhotoDiv>
           <PhotoPickerDiv>
-            <img src={imgString.small}></img>
+            <img alt="small_product_image" src={imgString.small} />
           </PhotoPickerDiv>
         </Container>
       </div>
@@ -73,3 +79,7 @@ const PhotoPickerDiv = styled.div`
   height: 79px;
   margin-top: 20px;
 `;
+
+App.propTypes = {
+  location: PropTypes.string.isRequired,
+};
