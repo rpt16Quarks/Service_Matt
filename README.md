@@ -1,13 +1,13 @@
-# Project Name
+# eBay Product Page Clone
 
-> Project description
+> Creating a clone of 4 modules of an ebay product page. The photo gallery, the product description, suggested products, and ratings and reviews.
 
 ## Related Projects
 
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
+  - https://github.com/rpt16Quarks/Proxy_Matt.git
+  - https://github.com/rpt16Quarks/alexFEC.git
+  - https://github.com/rpt16Quarks/service_troy.git
+  - https://github.com/rpt16Quarks/ratings_and_reviews_service.git
 
 ## Table of Contents
 
@@ -35,5 +35,17 @@ From within the root directory:
 ```sh
 npm install -g webpack
 npm install
+```
+#Seed the DB
+```
+npm run seedDB
+```
+#Build webpack bundle
+```
+npm run build
+```
+#Start the server
+```
+npm start
 ```
 
