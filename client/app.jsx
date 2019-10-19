@@ -17,7 +17,6 @@ class App extends React.Component {
 
   componentDidMount() {
     const { location: { search } } = this.props;
-    // const params = queryString.parse(this.props.location.search);
     const params = queryString.parse(search);
     console.log(params);
     fetch(`/images?id=${params.prod_id}`, {
