@@ -10,7 +10,11 @@ exports.seed = function(knex) {
       //Create array of fake products
       var fakeProducts = [];
       for (var i = 0; i < 100; i++) {
-        fakeProducts.push({name: faker.random.words(3)});
+        if (i === 0) {
+          fakeProducts.push({name: 'Star Wars Super Deluxe 24" Talking Plush: Chewbacca'});
+        } else {
+          fakeProducts.push({name: faker.random.words(3)});
+        }
       }
       // Inserts seed entries
       return knex('products').insert(fakeProducts);

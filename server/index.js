@@ -17,8 +17,6 @@ app.get('/images', (req, res) => {
     if (err) {
       console.log('Query error: ', err);
     }
-    // console.log('Query results: ', results);
-    // console.log(results[0][0].name);
     const data = { name: results[0][0].name };
     const imgArray = results[1].map((x) => (
       {
@@ -36,3 +34,5 @@ app.get('/images', (req, res) => {
 app.listen(PORT, () => {
   console.log(`listening on port ${PORT}`);
 });
+
+module.exports = app;
