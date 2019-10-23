@@ -2,6 +2,7 @@ import React from 'react';
 import queryString from 'query-string';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import ImageList from './components/imageList';
 
 class App extends React.Component {
   constructor(props) {
@@ -48,7 +49,8 @@ class App extends React.Component {
             <LargeImg src={imgString.large} />
           </MainPhotoDiv>
           <PhotoPickerDiv>
-            <img alt="small_product_image" src={imgString.small} />
+            {/* <img alt="small_product_image" src={imgString.small} /> */}
+            <ImageList images={images} />
           </PhotoPickerDiv>
         </Container>
       </div>
@@ -77,6 +79,7 @@ const LargeImg = styled.img`
 const PhotoPickerDiv = styled.div`
   height: 79px;
   margin-top: 20px;
+  text-align: center;
 `;
 
 App.propTypes = {
