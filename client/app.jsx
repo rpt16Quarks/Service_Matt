@@ -2,6 +2,7 @@ import React from 'react';
 import queryString from 'query-string';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import ImageList from './components/imageList';
 
 class App extends React.Component {
   constructor(props) {
@@ -12,7 +13,9 @@ class App extends React.Component {
         small: '',
         large: '',
       }],
+      selected: null,
     };
+    this.selectImage = this.selectImage.bind(this);
   }
 
   componentDidMount() {
@@ -32,9 +35,15 @@ class App extends React.Component {
       });
   }
 
+  selectImage(e) {
+    const imageID = Number(e.target.id);
+    this.setState({
+      selected: imageID,
+    });
+  }
 
   render() {
-    const { images, name } = this.state;
+    const { images, name, selected } = this.state;
     const imgString = images[images.length - 1];
     console.log(imgString);
     return (
@@ -48,7 +57,8 @@ class App extends React.Component {
             <LargeImg src={imgString.large} />
           </MainPhotoDiv>
           <PhotoPickerDiv>
-            <img alt="small_product_image" src={imgString.small} />
+            {/* <img alt="small_product_image" src={imgString.small} /> */}
+            <ImageList images={images} selectImage={this.selectImage} selected={selected} />
           </PhotoPickerDiv>
         </Container>
       </div>
@@ -77,6 +87,7 @@ const LargeImg = styled.img`
 const PhotoPickerDiv = styled.div`
   height: 79px;
   margin-top: 20px;
+  text-align: center;
 `;
 
 App.propTypes = {
