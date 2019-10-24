@@ -13,7 +13,9 @@ class App extends React.Component {
         small: '',
         large: '',
       }],
+      selected: null,
     };
+    this.selectImage = this.selectImage.bind(this);
   }
 
   componentDidMount() {
@@ -33,9 +35,15 @@ class App extends React.Component {
       });
   }
 
+  selectImage(e) {
+    const imageID = Number(e.target.id);
+    this.setState({
+      selected: imageID,
+    });
+  }
 
   render() {
-    const { images, name } = this.state;
+    const { images, name, selected } = this.state;
     const imgString = images[images.length - 1];
     console.log(imgString);
     return (
@@ -50,7 +58,7 @@ class App extends React.Component {
           </MainPhotoDiv>
           <PhotoPickerDiv>
             {/* <img alt="small_product_image" src={imgString.small} /> */}
-            <ImageList images={images} />
+            <ImageList images={images} selectImage={this.selectImage} selected={selected} />
           </PhotoPickerDiv>
         </Container>
       </div>

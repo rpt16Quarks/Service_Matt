@@ -3,12 +3,19 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import SmallImage from './smallImage';
 
-function ImageList(props) {
-  const { images } = props;
+function ImageList({ images, selectImage, selected }) {
+  // const { images } = props;
   const listItems = [];
 
   for (let i = 0; i < images.length; i += 1) {
-    listItems.push(<SmallImage image={images[i].small} />);
+    listItems.push(
+      <SmallImage
+        image={images[i].small}
+        id={i}
+        selectImage={selectImage}
+        selected={selected === i}
+      />,
+    );
   }
 
   return (
@@ -27,4 +34,6 @@ const SelectorList = styled.ul`
 
 ImageList.propTypes = {
   images: PropTypes.arrayOf(PropTypes.object).isRequired,
+  selectImage: PropTypes.func.isRequired,
+  selected: PropTypes.bool.isRequired,
 };
