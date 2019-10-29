@@ -1,0 +1,21 @@
+version: '2.1'
+services:
+    db:
+        build: ./db
+        environment:
+            - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+        healthcheck:
+            test: "exit 0"
+    
+    ebay_gallery:
+        build: .
+        depends_on:
+            db:
+                condition: service_healthy
+        links:
+            - db:db
+        environment:
+            - MYSQL_HOST=db
+            - ENVIRONMENT=production
+        ports:
+            - "3003:3003"

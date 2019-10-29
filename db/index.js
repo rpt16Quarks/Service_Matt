@@ -1,27 +1,22 @@
-const knex = require('knex')({
-  client: 'mysql',
-  connection: {
-    database: 'gallery',
-    user: 'root',
-    password: ''
-  }
-});
+const environment = process.env.ENVIRONMENT || 'development';
+const config = require('./knexfile')[environment];
+const knex = require('knex')(config);
 
-const getProductImages = function(id, callback) {
-  var queries = [];
+const getProductImages = function (id, callback) {
+  const queries = [];
 
   queries.push(knex('products').where('id', id));
   queries.push(knex('images').where('product_id', id));
 
   Promise.all(queries)
-    .then(function(results) {
+    .then((results) => {
       callback(null, results);
     })
-    .catch(function(err) {
+    .catch((err) => {
       callback(err);
     });
 };
 
 module.exports = {
-  getProductImages
+  getProductImages,
 };

@@ -13,7 +13,7 @@ class App extends React.Component {
         small: '',
         large: '',
       }],
-      selected: null,
+      selected: -1,
     };
     this.selectImage = this.selectImage.bind(this);
   }
@@ -91,5 +91,5 @@ const PhotoPickerDiv = styled.div`
 `;
 
 App.propTypes = {
-  location: PropTypes.string.isRequired,
+  location: PropTypes.objectOf(PropTypes.object).isRequired,
 };
