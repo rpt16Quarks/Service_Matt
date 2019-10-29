@@ -1,4 +1,4 @@
-FROM mysql:5
+FROM mysql:5.7.28
 
 ENV MYSQL_DATABASE gallery
 ENV MYSQL_USER fec_gallery

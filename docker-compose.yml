@@ -2,6 +2,7 @@ version: '2.1'
 services:
     db:
         build: ./db
+        command: --max_connections=400
         environment:
             - MYSQL_ALLOW_EMPTY_PASSWORD=yes
         healthcheck:
@@ -12,6 +13,7 @@ services:
         depends_on:
             db:
                 condition: service_healthy
+        command: sh -c './wait-for-it db:3306 -t 30 -- npm run seedDocker; npm start'
         links:
             - db:db
         environment:
