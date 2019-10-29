@@ -10,6 +10,7 @@ function ImageList({ images, selectImage, selected }) {
   for (let i = 0; i < images.length; i += 1) {
     listItems.push(
       <SmallImage
+        key={i}
         image={images[i].small}
         id={i}
         selectImage={selectImage}
@@ -35,5 +36,5 @@ const SelectorList = styled.ul`
 ImageList.propTypes = {
   images: PropTypes.arrayOf(PropTypes.object).isRequired,
   selectImage: PropTypes.func.isRequired,
-  selected: PropTypes.bool.isRequired,
+  selected: PropTypes.number.isRequired,
 };
