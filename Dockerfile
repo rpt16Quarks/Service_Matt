@@ -7,4 +7,6 @@ COPY . .
 RUN npm run build
 #RUN npm run seedDocker
 
+EXPOSE 3003
+
 CMD [ "npm", "start" ] 
