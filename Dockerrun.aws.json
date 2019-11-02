@@ -1,0 +1,50 @@
+{
+  "AWSEBDockerrunVersion": 2,
+  "volumes": [
+    {
+      "name": "data",
+      "host": {
+        "sourcePath": "/var/app/current/db"
+      }
+    },
+    {
+     "name": "web",
+     "host": {
+       "sourcePath": "/var/app/current/"
+     }
+   }
+  ],
+  "containerDefinitions": [
+    {
+      "name": "fec_client",
+      "image": "mattraetz/fec_app:latest",
+      "environment": [
+          {
+            "name": "ENVIRONMENT",
+            "value": "production"
+          }
+      ],
+      "portMappings": [
+        {
+          "hostPort": 80,
+          "containerPort": 3003
+        }
+      ],
+      "links": [
+        "fec_db"
+      ],
+      "command": [
+        "npm run seedDocker", "npm start"
+      ]
+    },
+    {
+      "name": "fec_db",
+      "image": "mattraetz/fec_db:latest",
+      "mountPoints": [
+        {
+          "sourceVolume": "data"
+        }
+      ]
+    }
+  ]
+}
