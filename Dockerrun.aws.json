@@ -4,7 +4,7 @@
     {
       "name": "data",
       "host": {
-        "sourcePath": "/var/app/current/db"
+        "sourcePath": "/var/app/current/db/data"
       }
     },
     {
@@ -17,11 +17,16 @@
   "containerDefinitions": [
     {
       "name": "fec_client",
-      "image": "mattraetz/fec_app:latest",
+      "image": "mattraetz/fec_app:1.0",
+      "memory": 128,
       "environment": [
           {
             "name": "ENVIRONMENT",
             "value": "production"
+          },
+          {
+            "name": "MYSQL_HOST",
+            "value": "fec_db"
           }
       ],
       "portMappings": [
@@ -32,17 +37,22 @@
       ],
       "links": [
         "fec_db"
-      ],
-      "command": [
-        "npm run seedDocker", "npm start"
       ]
     },
     {
       "name": "fec_db",
-      "image": "mattraetz/fec_db:latest",
+      "image": "mattraetz/fec_db:1.0",
+      "memory": 128,
+      "environment": [
+        {
+          "name": "MYSQL_ALLOW_EMPTY_PASSWORD",
+          "value": "yes"
+        }
+      ],
       "mountPoints": [
         {
-          "sourceVolume": "data"
+          "sourceVolume": "data",
+          "containerPath": "/var/lib/mysql"
         }
       ]
     }
