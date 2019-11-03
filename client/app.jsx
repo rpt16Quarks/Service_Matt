@@ -18,6 +18,8 @@ class App extends React.Component {
       mainIndex: 0,
     };
     this.selectImage = this.selectImage.bind(this);
+    this.imageMouseEnter = this.imageMouseEnter.bind(this);
+    this.imageMouseLeave = this.imageMouseLeave.bind(this);
   }
 
   componentDidMount() {
@@ -45,6 +47,20 @@ class App extends React.Component {
     });
   }
 
+  imageMouseEnter(e) {
+    const imageID = Number(e.target.id);
+    this.setState({
+      mainIndex: imageID,
+    });
+  }
+
+  imageMouseLeave() {
+    const { selected } = this.state;
+    this.setState({
+      mainIndex: selected >= 0 ? selected : 0,
+    });
+  }
+
   render() {
     const { images, name, selected, mainIndex } = this.state;
     const imgString = images[mainIndex];
@@ -58,8 +74,13 @@ class App extends React.Component {
         <Container>
           <MainImage image={imgString.large} />
           <PhotoPickerDiv>
-            {/* <img alt="small_product_image" src={imgString.small} /> */}
-            <ImageList images={images} selectImage={this.selectImage} selected={selected} />
+            <ImageList
+              images={images}
+              selectImage={this.selectImage}
+              selected={selected}
+              mouseEnter={this.imageMouseEnter}
+              mouseLeave={this.imageMouseLeave}
+            />
           </PhotoPickerDiv>
         </Container>
       </div>

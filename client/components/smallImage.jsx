@@ -2,10 +2,16 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-function SmallImage({ image, id, selectImage, selected }) {
+function SmallImage({ image, id, selectImage, selected, mouseEnter, mouseLeave }) {
   return (
     <ListItem>
-      <ImageDiv onClick={selectImage} selected={selected}>
+      <ImageDiv
+        id={id}
+        onClick={selectImage}
+        selected={selected}
+        onMouseEnter={mouseEnter}
+        onMouseLeave={mouseLeave}
+      >
         <StyledImage alt="small_product_image" src={image} id={id} />
       </ImageDiv>
     </ListItem>
@@ -49,5 +55,7 @@ SmallImage.propTypes = {
   image: PropTypes.string.isRequired,
   id: PropTypes.number.isRequired,
   selectImage: PropTypes.func.isRequired,
+  mouseEnter: PropTypes.func.isRequired,
+  mouseLeave: PropTypes.func.isRequired,
   selected: PropTypes.bool.isRequired,
 };
