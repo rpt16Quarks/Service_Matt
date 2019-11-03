@@ -42,7 +42,7 @@
     {
       "name": "fec_db",
       "image": "mattraetz/fec_db:1.0",
-      "memory": 128,
+      "memory": 256,
       "environment": [
         {
           "name": "MYSQL_ALLOW_EMPTY_PASSWORD",
