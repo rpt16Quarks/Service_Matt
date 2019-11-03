@@ -3,6 +3,7 @@ import queryString from 'query-string';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import ImageList from './components/imageList';
+import MainImage from './components/MainImage';
 
 class App extends React.Component {
   constructor(props) {
@@ -14,6 +15,7 @@ class App extends React.Component {
         large: '',
       }],
       selected: -1,
+      mainIndex: 0,
     };
     this.selectImage = this.selectImage.bind(this);
   }
@@ -39,12 +41,13 @@ class App extends React.Component {
     const imageID = Number(e.target.id);
     this.setState({
       selected: imageID,
+      mainIndex: imageID,
     });
   }
 
   render() {
-    const { images, name, selected } = this.state;
-    const imgString = images[images.length - 1];
+    const { images, name, selected, mainIndex } = this.state;
+    const imgString = images[mainIndex];
     console.log(imgString);
     return (
       <div>
@@ -53,9 +56,7 @@ class App extends React.Component {
           {name}
         </p>
         <Container>
-          <MainPhotoDiv>
-            <LargeImg src={imgString.large} />
-          </MainPhotoDiv>
+          <MainImage image={imgString.large} />
           <PhotoPickerDiv>
             {/* <img alt="small_product_image" src={imgString.small} /> */}
             <ImageList images={images} selectImage={this.selectImage} selected={selected} />
@@ -71,17 +72,6 @@ export default App;
 const Container = styled.div`
   width: 500px;
   background: #f8f8f8;
-`;
-
-const MainPhotoDiv = styled.div`
-  border: 1px solid #ccc;
-  background-color: white;
-  min-width: 500px;
-  max-height: 500px;
-`;
-
-const LargeImg = styled.img`
-  width: 100%;
 `;
 
 const PhotoPickerDiv = styled.div`
