@@ -4,8 +4,18 @@ import PropTypes from 'prop-types';
 
 function MainImage({ image }) {
   return (
-    <MainPhotoDiv>
+    <MainPhotoDiv className="carousel carousel_container">
+      <button className="carousel__control carousel__control--prev" aria-label="Previous Slide - Top Products" disabled>
+        <svg aria-hidden="true" className="icon icon--chevron-left-small" focusable="false">
+          <use href="#icon-chevron-left"/>
+        </svg>
+      </button>
       <LargeImg src={image} />
+      <button className="carousel__control carousel__control--next" aria-label="Next Slide - Top Products">
+        <svg aria-hidden="true" className="icon icon--chevron-right-small" focusable="false">
+          <use href="#icon-chevron-right"/>
+        </svg>
+      </button>
     </MainPhotoDiv>
   );
 }
@@ -27,6 +37,10 @@ const MainPhotoDiv = styled.div`
 const LargeImg = styled.img`
   max-width: 500px;
   max-height: 500px;
+`;
+
+const ButtonLeft = styled.button`
+  opacity: 0.3 !important;
 `;
 
 MainImage.propTypes = {

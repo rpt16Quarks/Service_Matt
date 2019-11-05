@@ -4,6 +4,10 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import ImageList from './components/imageList';
 import MainImage from './components/MainImage';
+import './styles/button.css';
+import './styles/carousel.css';
+import './styles/foreground.css';
+import './styles/icons.svg';
 
 class App extends React.Component {
   constructor(props) {
@@ -14,12 +18,13 @@ class App extends React.Component {
         small: '',
         large: '',
       }],
-      selected: -1,
+      selected: 0,
       mainIndex: 0,
     };
     this.selectImage = this.selectImage.bind(this);
     this.imageMouseEnter = this.imageMouseEnter.bind(this);
     this.imageMouseLeave = this.imageMouseLeave.bind(this);
+    this.changeImage = this.changeImage.bind(this);
   }
 
   componentDidMount() {
@@ -59,6 +64,10 @@ class App extends React.Component {
     this.setState({
       mainIndex: selected >= 0 ? selected : 0,
     });
+  }
+
+  changeImage(e) {
+
   }
 
   render() {
