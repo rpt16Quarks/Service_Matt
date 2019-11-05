@@ -21,8 +21,9 @@ module.exports = {
   production: {
     client: 'mysql',
     connection: {
-      host: process.env.MYSQL_HOST || '127.0.0.1',
-      port: 3306,
+      // host: process.env.MYSQL_HOST || '127.0.0.1',
+      host: process.env.MYSQL_HOST,
+      // port: 3306,
       database: 'gallery',
       user: 'fec_gallery',
       password: '123',
