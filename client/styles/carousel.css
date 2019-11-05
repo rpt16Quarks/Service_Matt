@@ -202,7 +202,7 @@ span.carousel__container {
   width: 28px;
 }
 .carousel__control svg {
-  color: #333;
+  color: #767676;
 }
 @media (min-width: 601px) {
   .carousel:hover .carousel__control,
@@ -248,4 +248,11 @@ span.carousel__container {
 .carousel__control .icon--chevron-left,
 .carousel__control .icon--chevron-left-small {
   margin-left: -2px;
+}
+.carousel__control:disabled {
+  opacity: 0.3 !important;
+  background-color: #fff !important;
+}
+.carousel__control:disabled svg{
+  color: #767676 !important;
 }

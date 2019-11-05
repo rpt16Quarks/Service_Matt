@@ -33,6 +33,7 @@ export default ImageList;
 const SelectorList = styled.ul`
   list-style-type: none;
   padding-inline-start: 0px;
+  overflow: hidden;
 `;
 
 ImageList.propTypes = {
