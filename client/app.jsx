@@ -67,12 +67,23 @@ class App extends React.Component {
   }
 
   changeImage(e) {
-
+    const { selected } = this.state;
+    let changeSelected = 0;
+    if (e.target.id === 'next') {
+      changeSelected = 1;
+    } else {
+      changeSelected = -1;
+    }
+    this.setState({
+      selected: selected + changeSelected,
+      mainIndex: selected + changeSelected,
+    });
   }
 
   render() {
     const { images, name, selected, mainIndex } = this.state;
     const imgString = images[mainIndex];
+    const numOfImages = images.length;
     console.log(imgString);
     return (
       <div>
@@ -81,7 +92,12 @@ class App extends React.Component {
           {name}
         </p>
         <Container>
-          <MainImage image={imgString.large} />
+          <MainImage
+            image={imgString.large}
+            changeImage={this.changeImage}
+            numOfImages={numOfImages}
+            selected={selected}
+          />
           <PhotoPickerDiv>
             <ImageList
               images={images}

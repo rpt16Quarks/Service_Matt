@@ -2,18 +2,18 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-function MainImage({ image }) {
+function MainImage({ image, changeImage, numOfImages, selected }) {
   return (
     <MainPhotoDiv className="carousel carousel_container">
-      <button className="carousel__control carousel__control--prev" aria-label="Previous Slide - Top Products" disabled>
+      <button id="prev" onClick={changeImage} className="carousel__control carousel__control--prev" aria-label="Previous Slide - Top Products" disabled={selected === 0}>
         <svg aria-hidden="true" className="icon icon--chevron-left-small" focusable="false">
-          <use href="#icon-chevron-left"/>
+          <use href="#icon-chevron-left" />
         </svg>
       </button>
       <LargeImg src={image} />
-      <button className="carousel__control carousel__control--next" aria-label="Next Slide - Top Products">
+      <button id="next" onClick={changeImage} className="carousel__control carousel__control--next" aria-label="Next Slide - Top Products" disabled={selected === numOfImages - 1}>
         <svg aria-hidden="true" className="icon icon--chevron-right-small" focusable="false">
-          <use href="#icon-chevron-right"/>
+          <use href="#icon-chevron-right" />
         </svg>
       </button>
     </MainPhotoDiv>
@@ -45,4 +45,7 @@ const ButtonLeft = styled.button`
 
 MainImage.propTypes = {
   image: PropTypes.string.isRequired,
+  changeImage: PropTypes.func.isRequired,
+  numOfImages: PropTypes.number.isRequired,
+  selected: PropTypes.number.isRequired,
 };
