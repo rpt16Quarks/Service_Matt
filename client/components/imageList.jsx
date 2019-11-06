@@ -57,7 +57,7 @@ const CarouselButton = styled.button`
   display: inline-block;
   cursor: pointer;
 
-  :disabled {
+  &:disabled {
     background: #767676;
     opacity: 0.3;
   }

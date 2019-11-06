@@ -2,7 +2,12 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-function MainImage({ image, changeImage, numOfImages, selected }) {
+function MainImage({
+  image,
+  changeImage,
+  numOfImages,
+  selected,
+}) {
   return (
     <MainPhotoDiv className="carousel carousel_container">
       <button id="prev" onClick={changeImage} className="carousel__control carousel__control--prev" aria-label="Previous Slide - Top Products" disabled={selected === 0}>
@@ -34,15 +39,13 @@ const MainPhotoDiv = styled.div`
   text-align: center;
   vertical-align: middle;
   display: table-cell;
-`;
+  `;
 
 const LargeImg = styled.img`
   max-width: 500px;
   max-height: 500px;
-`;
-
-const ButtonLeft = styled.button`
-  opacity: 0.3 !important;
+  width: auto;
+  height: auto;
 `;
 
 MainImage.propTypes = {

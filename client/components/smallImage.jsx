@@ -49,7 +49,7 @@ const ImageDiv = styled.div`
   background-color: #FFF;
   cursor: pointer;
 
-  :hover{
+  &:hover{
     border: 1px solid #777;
   }
 `;
