@@ -59,6 +59,7 @@ const CarouselButton = styled.button`
 
   :disabled {
     background: #767676;
+    opacity: 0.3;
   }
 `;
 

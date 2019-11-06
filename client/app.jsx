@@ -69,16 +69,23 @@ class App extends React.Component {
   }
 
   changeMainImage(e) {
-    const { selected } = this.state;
-    let changeSelected = 0;
+    const { selected, carouselStart } = this.state;
+    let newSelected = 0;
+    let newStart = carouselStart;
     if (e.target.id === 'next') {
-      changeSelected = 1;
+      newSelected = selected + 1;
     } else {
-      changeSelected = -1;
+      newSelected = selected - 1;
+    }
+    if (newSelected < carouselStart) {
+      newStart = carouselStart - 1;
+    } else if (newSelected >= carouselStart + 6) {
+      newStart = carouselStart + 1;
     }
     this.setState({
-      selected: selected + changeSelected,
-      mainIndex: selected + changeSelected,
+      selected: newSelected,
+      mainIndex: newSelected,
+      carouselStart: newStart,
     });
   }
 
