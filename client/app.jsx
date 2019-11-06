@@ -20,11 +20,13 @@ class App extends React.Component {
       }],
       selected: 0,
       mainIndex: 0,
+      carouselStart: 0,
     };
     this.selectImage = this.selectImage.bind(this);
     this.imageMouseEnter = this.imageMouseEnter.bind(this);
     this.imageMouseLeave = this.imageMouseLeave.bind(this);
-    this.changeImage = this.changeImage.bind(this);
+    this.changeMainImage = this.changeMainImage.bind(this);
+    this.slideCarousel = this.slideCarousel.bind(this);
   }
 
   componentDidMount() {
@@ -66,7 +68,7 @@ class App extends React.Component {
     });
   }
 
-  changeImage(e) {
+  changeMainImage(e) {
     const { selected } = this.state;
     let changeSelected = 0;
     if (e.target.id === 'next') {
@@ -80,8 +82,27 @@ class App extends React.Component {
     });
   }
 
+  slideCarousel(e) {
+    const { images, carouselStart } = this.state;
+    let newStart = 0;
+    if (e.target.id === 'next') {
+      newStart = Math.min(carouselStart + 6, images.length - 6);
+    } else {
+      newStart = Math.max(carouselStart - 6, 0);
+    }
+    this.setState({
+      carouselStart: newStart,
+    });
+  }
+
   render() {
-    const { images, name, selected, mainIndex } = this.state;
+    const {
+      images,
+      name,
+      selected,
+      mainIndex,
+      carouselStart,
+    } = this.state;
     const imgString = images[mainIndex];
     const numOfImages = images.length;
     console.log(imgString);
@@ -94,7 +115,7 @@ class App extends React.Component {
         <Container>
           <MainImage
             image={imgString.large}
-            changeImage={this.changeImage}
+            changeImage={this.changeMainImage}
             numOfImages={numOfImages}
             selected={selected}
           />
@@ -105,6 +126,8 @@ class App extends React.Component {
               selected={selected}
               mouseEnter={this.imageMouseEnter}
               mouseLeave={this.imageMouseLeave}
+              carouselStart={carouselStart}
+              slideCarousel={this.slideCarousel}
             />
           </PhotoPickerDiv>
         </Container>
@@ -124,6 +147,7 @@ const PhotoPickerDiv = styled.div`
   height: 79px;
   margin-top: 20px;
   text-align: center;
+  position: relative;
 `;
 
 App.propTypes = {

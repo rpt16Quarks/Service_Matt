@@ -2,7 +2,14 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-function SmallImage({ image, id, selectImage, selected, mouseEnter, mouseLeave }) {
+function SmallImage({
+  image,
+  id,
+  selectImage,
+  selected,
+  mouseEnter,
+  mouseLeave,
+}) {
   return (
     <ListItem>
       <ImageDiv
@@ -40,6 +47,7 @@ const ImageDiv = styled.div`
   vertical-align: middle;
   display: table-cell;
   background-color: #FFF;
+  cursor: pointer;
 
   &: hover{
     border: 1px solid #777;

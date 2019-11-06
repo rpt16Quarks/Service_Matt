@@ -3,11 +3,19 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import SmallImage from './smallImage';
 
-function ImageList({ images, selectImage, selected, mouseEnter, mouseLeave }) {
-  // const { images } = props;
+function ImageList({
+  images,
+  selectImage,
+  selected,
+  mouseEnter,
+  mouseLeave,
+  carouselStart,
+  slideCarousel,
+}) {
   const listItems = [];
+  const imgCount = Math.min(images.length, carouselStart + 6);
 
-  for (let i = 0; i < images.length; i += 1) {
+  for (let i = carouselStart; i < imgCount; i += 1) {
     listItems.push(
       <SmallImage
         key={i}
@@ -22,9 +30,13 @@ function ImageList({ images, selectImage, selected, mouseEnter, mouseLeave }) {
   }
 
   return (
-    <SelectorList>
-      {listItems}
-    </SelectorList>
+    <>
+      <CarouselLeft id="prev" onClick={slideCarousel} disabled={carouselStart === 0} />
+      <SelectorList>
+        {listItems}
+      </SelectorList>
+      <CarouselRight id="next" onClick={slideCarousel} disabled={carouselStart + 6 >= images.length} />
+    </>
   );
 }
 
@@ -33,7 +45,30 @@ export default ImageList;
 const SelectorList = styled.ul`
   list-style-type: none;
   padding-inline-start: 0px;
-  overflow: hidden;
+`;
+
+const CarouselButton = styled.button`
+  width: 8px;
+  height: 12px;
+  margin-top: 32px;
+  background: blue;
+  padding: 0px;
+  position: absolute;
+  display: inline-block;
+  cursor: pointer;
+
+  :disabled {
+    background: #767676;
+  }
+`;
+
+const CarouselLeft = styled(CarouselButton)`
+  left: 3px;
+`;
+
+const CarouselRight = styled(CarouselButton)`
+  right: 3px;
+  top: 0;
 `;
 
 ImageList.propTypes = {
@@ -42,4 +77,6 @@ ImageList.propTypes = {
   mouseEnter: PropTypes.func.isRequired,
   mouseLeave: PropTypes.func.isRequired,
   selected: PropTypes.number.isRequired,
+  slideCarousel: PropTypes.func.isRequired,
+  carouselStart: PropTypes.number.isRequired,
 };
