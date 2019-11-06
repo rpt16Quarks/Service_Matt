@@ -9,7 +9,7 @@
   },
   "scripts": {
     "start": "node server/index.js",
-    "startDev": "nodemon server/index.js",
+    "startDev": "SC_ATTR=gallery nodemon server/index.js",
     "build": "webpack --config webpack.prod.js",
     "watch": "webpack --watch --config webpack.dev.js",
     "seedDB": "mysql -u root < ./db/schema.sql; ./node_modules/.bin/knex --knexfile ./db/knexfile.js  migrate:latest; ./node_modules/.bin/knex --knexfile ./db/knexfile.js seed:run",
@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "@ebay/skin": "^9.4.0",
+    "@quickbaseoss/babel-plugin-styled-components-css-namespace": "^1.0.0-rc3",
     "body-parser": "^1.19.0",
     "express": "^4.17.1",
     "faker": "^4.1.0",

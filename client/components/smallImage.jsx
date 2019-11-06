@@ -37,9 +37,9 @@ const ImageDiv = styled.div`
   margin: 0;
   border: ${({ selected }) => {
     if (selected) {
-      return `2px solid #777 !important`;
+      return `2px solid #777 !important;`;
     } else {
-      return `1px solid #CCC`;
+      return `1px solid #CCC;`;
     }
   }};
   border-radius: 3px;
@@ -49,7 +49,7 @@ const ImageDiv = styled.div`
   background-color: #FFF;
   cursor: pointer;
 
-  &: hover{
+  :hover{
     border: 1px solid #777;
   }
 `;
