@@ -3,6 +3,11 @@ import queryString from 'query-string';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import ImageList from './components/imageList';
+import MainImage from './components/MainImage';
+import './styles/button.css';
+import './styles/carousel.css';
+import './styles/foreground.css';
+import './styles/icons.svg';
 
 class App extends React.Component {
   constructor(props) {
@@ -13,9 +18,15 @@ class App extends React.Component {
         small: '',
         large: '',
       }],
-      selected: -1,
+      selected: 0,
+      mainIndex: 0,
+      carouselStart: 0,
     };
     this.selectImage = this.selectImage.bind(this);
+    this.imageMouseEnter = this.imageMouseEnter.bind(this);
+    this.imageMouseLeave = this.imageMouseLeave.bind(this);
+    this.changeMainImage = this.changeMainImage.bind(this);
+    this.slideCarousel = this.slideCarousel.bind(this);
   }
 
   componentDidMount() {
@@ -39,12 +50,68 @@ class App extends React.Component {
     const imageID = Number(e.target.id);
     this.setState({
       selected: imageID,
+      mainIndex: imageID,
+    });
+  }
+
+  imageMouseEnter(e) {
+    const imageID = Number(e.target.id);
+    this.setState({
+      mainIndex: imageID,
+    });
+  }
+
+  imageMouseLeave() {
+    const { selected } = this.state;
+    this.setState({
+      mainIndex: selected >= 0 ? selected : 0,
+    });
+  }
+
+  changeMainImage(e) {
+    const { selected, carouselStart } = this.state;
+    let newSelected = 0;
+    let newStart = carouselStart;
+    if (e.target.id === 'next') {
+      newSelected = selected + 1;
+    } else {
+      newSelected = selected - 1;
+    }
+    if (newSelected < carouselStart) {
+      newStart = carouselStart - 1;
+    } else if (newSelected >= carouselStart + 6) {
+      newStart = carouselStart + 1;
+    }
+    this.setState({
+      selected: newSelected,
+      mainIndex: newSelected,
+      carouselStart: newStart,
+    });
+  }
+
+  slideCarousel(e) {
+    const { images, carouselStart } = this.state;
+    let newStart = 0;
+    if (e.target.id === 'next') {
+      newStart = Math.min(carouselStart + 6, images.length - 6);
+    } else {
+      newStart = Math.max(carouselStart - 6, 0);
+    }
+    this.setState({
+      carouselStart: newStart,
     });
   }
 
   render() {
-    const { images, name, selected } = this.state;
-    const imgString = images[images.length - 1];
+    const {
+      images,
+      name,
+      selected,
+      mainIndex,
+      carouselStart,
+    } = this.state;
+    const imgString = images[mainIndex];
+    const numOfImages = images.length;
     console.log(imgString);
     return (
       <div>
@@ -53,12 +120,22 @@ class App extends React.Component {
           {name}
         </p>
         <Container>
-          <MainPhotoDiv>
-            <LargeImg src={imgString.large} />
-          </MainPhotoDiv>
+          <MainImage
+            image={imgString.large}
+            changeImage={this.changeMainImage}
+            numOfImages={numOfImages}
+            selected={selected}
+          />
           <PhotoPickerDiv>
-            {/* <img alt="small_product_image" src={imgString.small} /> */}
-            <ImageList images={images} selectImage={this.selectImage} selected={selected} />
+            <ImageList
+              images={images}
+              selectImage={this.selectImage}
+              selected={selected}
+              mouseEnter={this.imageMouseEnter}
+              mouseLeave={this.imageMouseLeave}
+              carouselStart={carouselStart}
+              slideCarousel={this.slideCarousel}
+            />
           </PhotoPickerDiv>
         </Container>
       </div>
@@ -73,21 +150,11 @@ const Container = styled.div`
   background: #f8f8f8;
 `;
 
-const MainPhotoDiv = styled.div`
-  border: 1px solid #ccc;
-  background-color: white;
-  min-width: 500px;
-  max-height: 500px;
-`;
-
-const LargeImg = styled.img`
-  width: 100%;
-`;
-
 const PhotoPickerDiv = styled.div`
   height: 79px;
   margin-top: 20px;
   text-align: center;
+  position: relative;
 `;
 
 App.propTypes = {
