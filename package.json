@@ -21,6 +21,7 @@
     "@ebay/skin": "^9.4.0",
     "@quickbaseoss/babel-plugin-styled-components-css-namespace": "^1.0.0-rc3",
     "body-parser": "^1.19.0",
+    "compression": "^1.7.4",
     "express": "^4.17.1",
     "faker": "^4.1.0",
     "knex": "^0.19.4",
@@ -29,6 +30,7 @@
     "query-string": "^6.8.3",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
+    "react-image-magnify": "^2.7.4",
     "react-router-dom": "^5.1.2",
     "styled-components": "^4.4.0"
   },
@@ -49,6 +51,7 @@
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-react": "^7.16.0",
     "eslint-plugin-react-hooks": "^1.7.0",
+    "grunt": "^1.0.4",
     "jest": "^24.9.0",
     "style-loader": "^1.0.0",
     "supertest": "^4.0.2",
