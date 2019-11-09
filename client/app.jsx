@@ -17,6 +17,7 @@ class App extends React.Component {
       images: [{
         small: '',
         large: '',
+        zoom: '',
       }],
       selected: 0,
       mainIndex: 0,
@@ -114,14 +115,12 @@ class App extends React.Component {
     const numOfImages = images.length;
     console.log(imgString);
     return (
-      <div>
-        <p>
-          Product Name:
-          {name}
-        </p>
-        <Container>
+      <Container>
+        <GalleryContainer>
           <MainImage
+            name={name}
             image={imgString.large}
+            zoomImage={imgString.zoom}
             changeImage={this.changeMainImage}
             numOfImages={numOfImages}
             selected={selected}
@@ -137,8 +136,12 @@ class App extends React.Component {
               slideCarousel={this.slideCarousel}
             />
           </PhotoPickerDiv>
-        </Container>
-      </div>
+        </GalleryContainer>
+        <ZoomContainer id="zoomContainer" />
+        <ImageContainer id="zoomContainer">
+          <PanelImage src="https://fec-product-images.s3.us-east-2.amazonaws.com/eBay_panel.png" />
+        </ImageContainer>
+      </Container>
     );
   }
 }
@@ -146,8 +149,35 @@ class App extends React.Component {
 export default App;
 
 const Container = styled.div`
+  width: 90%;
+  background: #f8f8f8;
+  margin: 5%;
+  position: relative;
+`;
+
+const GalleryContainer = styled.div`
   width: 500px;
   background: #f8f8f8;
+  float: left;
+`;
+
+const ZoomContainer = styled.div`
+  background: #f8f8f8;
+  float: left;
+  width: 0;
+  margin-left: 10px;
+  z-index: 1;
+`;
+
+const ImageContainer = styled.div`
+  float: left;
+  width: 60%;
+`;
+
+const PanelImage = styled.img`
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
 `;
 
 const PhotoPickerDiv = styled.div`
