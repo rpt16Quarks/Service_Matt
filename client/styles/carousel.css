@@ -256,3 +256,9 @@ span.carousel__container {
 .carousel__control:disabled svg{
   color: #767676 !important;
 }
+.smallImage {
+  max-width: 500px;
+  max-height: 500px;
+  width: auto;
+  height: auto;
+}

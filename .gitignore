@@ -7,6 +7,9 @@ node_modules
 #Webpack bundle
 /public/app.js
 
+#Credentials
+aws-keys.json
+
 # Elastic Beanstalk Files
 .elasticbeanstalk/*
 !.elasticbeanstalk/*.cfg.yml
